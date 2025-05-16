@@ -1,0 +1,541 @@
+{% extends 'base.html' %}
+
+{% block title %}Editor Visual - METATONEHEN{% endblock %}
+
+{% block head %}
+<!-- GrapesJS Editor -->
+<link rel="stylesheet" href="https://unpkg.com/grapesjs/dist/css/grapes.min.css">
+<script src="https://unpkg.com/grapesjs"></script>
+<script src="https://unpkg.com/grapesjs-preset-webpage"></script>
+<script src="https://unpkg.com/grapesjs-blocks-basic"></script>
+<script src="https://unpkg.com/grapesjs-plugin-forms"></script>
+<script src="https://unpkg.com/grapesjs-style-bg"></script>
+<script src="https://unpkg.com/grapesjs-plugin-export"></script>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        height: 100vh;
+    }
+    
+    #gjs {
+        height: calc(100vh - 50px);
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    .navbar-editor {
+        background-color: #333;
+        color: white;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        justify-content: space-between;
+    }
+    
+    .navbar-editor a {
+        color: white;
+        text-decoration: none;
+        padding: 0 10px;
+    }
+    
+    .navbar-editor a:hover {
+        color: #C9AC48;
+    }
+    
+    .navbar-editor .logo {
+        font-weight: bold;
+    }
+    
+    .template-selector {
+        display: flex;
+        align-items: center;
+    }
+    
+    .template-selector select {
+        margin-left: 10px;
+        padding: 5px;
+        border-radius: 4px;
+    }
+    
+    .gjs-block {
+        width: auto;
+        height: auto;
+        min-height: auto;
+    }
+    
+    /* Editor customizations */
+    .gjs-pn-panel {
+        position: relative;
+    }
+    
+    .gjs-cv-canvas {
+        width: 100%;
+        height: 100%;
+        top: 0;
+    }
+    
+    .gjs-pn-panel.gjs-pn-views-container {
+        height: 100%;
+        width: 15%;
+        min-width: 150px;
+    }
+    
+    .gjs-pn-panel.gjs-pn-views {
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .gjs-pn-views .gjs-pn-btn.fa {
+        border-radius: 0;
+    }
+    
+    .gjs-pn-options {
+        right: 0;
+    }
+    
+    .gjs-pn-panel.gjs-pn-devices-c {
+        right: 15%;
+    }
+    
+    .gjs-blocks-c {
+        background: #f5f5f5;
+    }
+    
+    .gjs-layer-title-c {
+        justify-content: flex-start;
+    }
+    
+    .gjs-layer-title {
+        padding-left: 5px;
+    }
+    
+    .gjs-layer-count {
+        padding-right: 5px;
+    }
+    
+    .gjs-am-preview-cont {
+        height: 100px;
+    }
+    
+    /* Custom styles for asset manager */
+    #asset-manager-container {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 25%;
+        height: 100%;
+        background: white;
+        box-shadow: -3px 0 5px rgba(0,0,0,0.1);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 100;
+        overflow-y: auto;
+    }
+    
+    #asset-manager-container.open {
+        transform: translateX(0);
+    }
+    
+    .asset-manager-header {
+        padding: 15px;
+        background: #f1f1f1;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .asset-manager-header h3 {
+        margin: 0;
+    }
+    
+    .asset-manager-close {
+        cursor: pointer;
+        font-size: 20px;
+    }
+    
+    .asset-list {
+        padding: 15px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+    }
+    
+    .asset-item {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    
+    .asset-item:hover {
+        border-color: #C9AC48;
+        transform: scale(1.05);
+    }
+    
+    .asset-item img {
+        width: 100%;
+        height: 80px;
+        object-fit: cover;
+        display: block;
+    }
+    
+    .asset-caption {
+        font-size: 10px;
+        padding: 5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+        background: #f9f9f9;
+    }
+    
+    .btn-primary {
+        background-color: #C9AC48;
+        border-color: #C9AC48;
+    }
+    
+    .btn-primary:hover {
+        background-color: #b89b3d;
+        border-color: #b89b3d;
+    }
+    
+    .btn-outline-primary {
+        color: #C9AC48;
+        border-color: #C9AC48;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #C9AC48;
+        color: white;
+    }
+    
+    #save-btn {
+        background-color: #C9AC48;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    #save-btn:hover {
+        background-color: #b89b3d;
+    }
+    
+    .save-message {
+        margin-left: 10px;
+        color: #C9AC48;
+        display: none;
+    }
+    
+    .template-actions {
+        display: flex;
+        align-items: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Navigation bar for the editor -->
+<div class="navbar-editor">
+    <div class="logo">METATONEHEN Editor Visual</div>
+    <div class="template-selector">
+        <label for="page-select">Página:</label>
+        <select id="page-select">
+            <option value="index">Página de Inicio</option>
+            <option value="about">Acerca de</option>
+            <option value="courses">Cursos</option>
+            <option value="sessions">Sesiones</option>
+            <option value="group_sessions">Sesiones de Grupo</option>
+            <option value="memberships">Membresías</option>
+            <option value="contact">Contacto</option>
+            {% for page in custom_pages %}
+                <option value="custom_{{ page.id }}">{{ page.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="template-actions">
+        <button id="save-btn">Guardar Cambios</button>
+        <span class="save-message">¡Cambios guardados exitosamente!</span>
+        <button id="show-assets-btn" style="margin-left: 10px;">Gestionar Imágenes</button>
+        <a href="{{ url_for('admin_panel') }}" style="margin-left: 10px;">Volver al Panel</a>
+    </div>
+</div>
+
+<!-- GrapesJS Editor Container -->
+<div id="gjs"></div>
+
+<!-- Asset Manager Container -->
+<div id="asset-manager-container">
+    <div class="asset-manager-header">
+        <h3>Gestor de Imágenes</h3>
+        <span class="asset-manager-close">&times;</span>
+    </div>
+    <div class="p-3">
+        <form id="upload-form" enctype="multipart/form-data" class="mb-4">
+            <div class="mb-3">
+                <label for="file-upload" class="form-label">Subir Nueva Imagen</label>
+                <input type="file" class="form-control" id="file-upload" name="file" accept="image/*">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="description" name="description">
+            </div>
+            <button type="submit" class="btn btn-primary">Subir Imagen</button>
+        </form>
+        <hr>
+        <h5>Imágenes Disponibles</h5>
+        <div class="asset-list" id="asset-list">
+            {% for media in media_files %}
+                {% if media.file_type.startswith('image/') %}
+                    <div class="asset-item" data-url="{{ media.file_path }}">
+                        <img src="{{ media.file_path }}" alt="{{ media.description or media.original_filename }}">
+                        <div class="asset-caption">{{ media.original_filename }}</div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize GrapesJS
+        const editor = grapesjs.init({
+            container: '#gjs',
+            fromElement: false,
+            storageManager: false,
+            height: '100%',
+            width: 'auto',
+            panels: { defaults: [] },
+            deviceManager: {
+                devices: [
+                    {
+                        name: 'Desktop',
+                        width: '',
+                    },
+                    {
+                        name: 'Tablet',
+                        width: '768px',
+                        widthMedia: '992px',
+                    },
+                    {
+                        name: 'Mobile',
+                        width: '320px',
+                        widthMedia: '576px',
+                    }
+                ]
+            },
+            plugins: [
+                'gjs-preset-webpage',
+                'gjs-blocks-basic',
+                'gjs-plugin-forms',
+                'gjs-style-bg',
+                'gjs-plugin-export'
+            ],
+            pluginsOpts: {
+                'gjs-preset-webpage': {
+                    modalImportTitle: 'Importar HTML',
+                    modalImportLabel: 'Pega tu HTML aquí:',
+                    modalImportContent: '',
+                    importViewBtnText: 'Importar',
+                    codeViewerTheme: 'material',
+                    formsOpts: {},
+                    navbarOpts: {},
+                    blocksBasicOpts: {},
+                    countdownOpts: {},
+                },
+                'gjs-blocks-basic': {
+                    flexGrid: true,
+                },
+                'gjs-plugin-export': {
+                    btnLabel: 'Exportar',
+                    filenamePfx: 'metatonehen_page',
+                    root: {
+                        css: {
+                            'style.css': ed => ed.getCss(),
+                        },
+                        img: async ed => {
+                            const imgs = [];
+                            const comps = ed.Pages.getSelected().getMainComponent().findType('image');
+                            comps.forEach(comp => {
+                                const src = comp.get('src');
+                                if (src.indexOf('http') === 0) {
+                                    return;
+                                }
+                                imgs.push({
+                                    name: src.split('/').pop(),
+                                    url: src
+                                });
+                            });
+                            return imgs;
+                        },
+                        'index.html': ed => `
+                            <!doctype html>
+                            <html lang="es">
+                                <head>
+                                    <meta charset="utf-8">
+                                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                                    <title>METATONEHEN</title>
+                                    <link rel="stylesheet" href="./css/style.css">
+                                </head>
+                                <body>${ed.getHtml()}</body>
+                            </html>
+                        `
+                    }
+                }
+            }
+        });
+        
+        // Load initial HTML content based on selected page
+        loadPageContent('index');
+        
+        // Handle page selection change
+        document.getElementById('page-select').addEventListener('change', function() {
+            const pageName = this.value;
+            loadPageContent(pageName);
+        });
+        
+        // Save button click handler
+        document.getElementById('save-btn').addEventListener('click', function() {
+            const pageName = document.getElementById('page-select').value;
+            const htmlContent = editor.getHtml();
+            const cssContent = editor.getCss();
+            
+            // Send data to the server using fetch
+            fetch('/admin/save_visual_edit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    page_name: pageName,
+                    html_content: htmlContent,
+                    css_content: cssContent
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const saveMessage = document.querySelector('.save-message');
+                    saveMessage.style.display = 'inline';
+                    setTimeout(() => {
+                        saveMessage.style.display = 'none';
+                    }, 3000);
+                } else {
+                    alert('Error al guardar: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al guardar los cambios. Por favor, intenta nuevamente.');
+            });
+        });
+        
+        // Asset Manager toggle
+        document.getElementById('show-assets-btn').addEventListener('click', function() {
+            document.getElementById('asset-manager-container').classList.add('open');
+        });
+        
+        document.querySelector('.asset-manager-close').addEventListener('click', function() {
+            document.getElementById('asset-manager-container').classList.remove('open');
+        });
+        
+        // Handle asset selection
+        document.querySelectorAll('.asset-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const imageUrl = this.getAttribute('data-url');
+                editor.AssetManager.add({
+                    src: imageUrl
+                });
+                
+                // Insert image at current selected component or at the end
+                const selected = editor.getSelected();
+                if (selected) {
+                    selected.append(`<img src="${imageUrl}" alt="Image">`);
+                } else {
+                    editor.getComponents().add(`<img src="${imageUrl}" alt="Image">`);
+                }
+                
+                document.getElementById('asset-manager-container').classList.remove('open');
+            });
+        });
+        
+        // Handle file upload
+        document.getElementById('upload-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            
+            fetch('/admin/media/upload_ajax', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Add new asset to the list
+                    const assetList = document.getElementById('asset-list');
+                    const newAsset = document.createElement('div');
+                    newAsset.className = 'asset-item';
+                    newAsset.setAttribute('data-url', data.file_path);
+                    newAsset.innerHTML = `
+                        <img src="${data.file_path}" alt="${data.description || data.original_filename}">
+                        <div class="asset-caption">${data.original_filename}</div>
+                    `;
+                    
+                    newAsset.addEventListener('click', function() {
+                        const imageUrl = this.getAttribute('data-url');
+                        editor.AssetManager.add({
+                            src: imageUrl
+                        });
+                        
+                        const selected = editor.getSelected();
+                        if (selected) {
+                            selected.append(`<img src="${imageUrl}" alt="Image">`);
+                        } else {
+                            editor.getComponents().add(`<img src="${imageUrl}" alt="Image">`);
+                        }
+                        
+                        document.getElementById('asset-manager-container').classList.remove('open');
+                    });
+                    
+                    assetList.prepend(newAsset);
+                    
+                    // Clear the form
+                    document.getElementById('file-upload').value = '';
+                    document.getElementById('description').value = '';
+                } else {
+                    alert('Error al subir la imagen: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al subir la imagen. Por favor, intenta nuevamente.');
+            });
+        });
+        
+        // Function to load page content
+        function loadPageContent(pageName) {
+            fetch(`/admin/get_page_content/${pageName}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        editor.setComponents(data.html_content || '');
+                        editor.setStyle(data.css_content || '');
+                    } else {
+                        editor.setComponents('<div class="container"><h1>Página Nueva</h1><p>Comienza a editar esta página.</p></div>');
+                        editor.setStyle('');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al cargar el contenido de la página. Por favor, intenta nuevamente.');
+                });
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,142 @@
+/* 
+ * Portal Styles for Metatron's Cube hexagonal layout
+ */
+
+/* Base portal container */
+.metatron-portal-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.portal-title {
+    color: var(--gold);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.metatron-portal {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* Maintain aspect ratio */
+    margin: 0 auto 20px;
+}
+
+.portal-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+}
+
+/* Vertex positioning around hexagon */
+.portal-vertices {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+.portal-vertex {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: var(--white);
+    font-family: var(--heading-font);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-align: center;
+    z-index: 3;
+    transform: translate(-50%, -50%);
+}
+
+.portal-vertex:hover {
+    background-color: var(--gold);
+    color: var(--dark);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Specific vertex positions */
+.portal-vertex.vertex-1 {
+    top: 5%;
+    left: 50%;
+}
+
+.portal-vertex.vertex-2 {
+    top: 25%;
+    left: 86%;
+}
+
+.portal-vertex.vertex-3 {
+    top: 75%;
+    left: 86%;
+}
+
+.portal-vertex.vertex-4 {
+    top: 95%;
+    left: 50%;
+}
+
+.portal-vertex.vertex-5 {
+    top: 75%;
+    left: 14%;
+}
+
+.portal-vertex.vertex-6 {
+    top: 25%;
+    left: 14%;
+}
+
+/* Color variations for vertices */
+.portal-vertex.vertex-love {
+    background-color: rgba(217, 80, 138, 0.3);
+}
+
+.portal-vertex.vertex-money {
+    background-color: rgba(46, 125, 50, 0.3);
+}
+
+.portal-vertex.vertex-health {
+    background-color: rgba(66, 165, 245, 0.3);
+}
+
+.portal-vertex.vertex-mind {
+    background-color: rgba(74, 26, 158, 0.3);
+}
+
+.portal-vertex.vertex-soul {
+    background-color: rgba(130, 70, 175, 0.3);
+}
+
+.portal-vertex.vertex-body {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .portal-vertex {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .metatron-portal {
+        max-width: 300px;
+        padding-bottom: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .portal-vertex {
+        font-size: 0.7rem;
+        padding: 5px 10px;
+    }
+}

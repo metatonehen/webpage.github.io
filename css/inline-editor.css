@@ -1,0 +1,302 @@
+/* Estilos para el editor inline de METATONEHEN */
+
+.edit-mode-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9000;
+    pointer-events: none;
+}
+
+.edit-toolbar {
+    background: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
+}
+
+.edit-btn {
+    background: #C9AC48;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+    background: #b89b3d;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.edit-btn.cancel-btn {
+    background: #dc3545;
+}
+
+.edit-btn.cancel-btn:hover {
+    background: #c82333;
+}
+
+.edit-btn.exit-btn {
+    background: #6c757d;
+    text-decoration: none;
+}
+
+.edit-btn.exit-btn:hover {
+    background: #5a6268;
+}
+
+.edit-status {
+    margin-left: auto;
+    font-size: 14px;
+    background: rgba(201, 172, 72, 0.2);
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+/* Estilos para elementos editables */
+.editable-element {
+    transition: all 0.2s ease;
+    outline: 1px dashed transparent;
+    padding: 2px;
+    position: relative;
+}
+
+.editable-element:hover {
+    outline: 1px dashed #C9AC48;
+    background-color: rgba(201, 172, 72, 0.05);
+}
+
+.editable-element:focus {
+    outline: 2px solid #C9AC48;
+    background-color: rgba(201, 172, 72, 0.1);
+}
+
+.element-edited {
+    outline: 2px solid #28a745 !important;
+}
+
+.element-added {
+    outline: 2px solid #007bff !important;
+}
+
+.element-deleted {
+    outline: 2px solid #dc3545 !important;
+}
+
+/* Estilos para imágenes editables */
+.editable-image {
+    transition: all 0.2s ease;
+    outline: 1px dashed transparent;
+    position: relative;
+}
+
+.editable-image:hover {
+    outline: 1px dashed #C9AC48;
+    cursor: pointer;
+}
+
+/* Controles de elementos */
+.element-controls, .img-controls {
+    position: absolute;
+    z-index: 9002;
+    background: #333;
+    border-radius: 4px;
+    padding: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    pointer-events: auto;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    margin: 0 2px;
+    padding: 0;
+}
+
+.control-btn svg {
+    fill: currentColor;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.control-btn.delete-btn:hover, .control-btn.delete-img-btn:hover {
+    background: #dc3545;
+}
+
+.control-btn.duplicate-btn:hover {
+    background: #28a745;
+}
+
+.control-btn.replace-btn:hover {
+    background: #C9AC48;
+}
+
+/* Panel de subida de imágenes */
+.img-upload-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 9003;
+    display: none;
+    pointer-events: auto;
+}
+
+.img-upload-panel.active {
+    display: block;
+}
+
+.img-upload-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.img-upload-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.close-upload {
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-upload:hover {
+    color: #000;
+}
+
+.img-upload-panel form {
+    padding: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input[type="text"], 
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.upload-preview {
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.upload-preview h4 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #666;
+}
+
+.upload-preview-img {
+    max-width: 100%;
+    max-height: 200px;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Áreas para soltar imágenes */
+.image-drop-area {
+    min-height: 100px;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 20px 0;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+    position: relative;
+}
+
+.image-drop-area.drag-over {
+    border-color: #C9AC48;
+    background-color: rgba(201, 172, 72, 0.1);
+}
+
+.image-drop-area img {
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.add-image-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 15px;
+}
+
+.add-image-btn svg {
+    fill: currentColor;
+    margin-bottom: 5px;
+}
+
+.add-image-btn:hover {
+    color: #C9AC48;
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+    .edit-toolbar {
+        flex-wrap: wrap;
+        padding: 10px;
+    }
+    
+    .edit-status {
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+    }
+    
+    .element-controls, .img-controls {
+        transform: translateY(-100%);
+    }
+}
