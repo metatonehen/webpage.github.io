@@ -1,37 +1,319 @@
-{% extends 'base.html' %}
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>METATONEHEN - 
+    Spiritual Transformation
+</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.min_1.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/portal-styles.css">
+    
+    
+    
+    <!-- Selector de idioma CSS -->
+    <style>
+        .language-selector {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 9999;
+        }
+        
+        .connected-planet-icon {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9Imd1bG9iZSIgY3g9IjEwMCIgY3k9IjEwMCIgcj0iOTAiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDQ3YWZlIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjMDIyYzg5Ii8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSI5MCIgZmlsbD0idXJsKCNnbG9iZSkiLz48cGF0aCBkPSJNNDAgNjBjMjAgLTEwIDQwIC0xMCA2MCAwYzIwIDEwIDQwIDEwIDYwIDBNMzUgMTAwYzIwIC0xMCA0NSAtMTEgNjUgLTFjMjAgMTAgNDUgMTAgNjUgME0zNSAxNDBjMjAgLTEwIDQ1IC0xMSA2NSAtMWMyMCAxMCA0NSAxMCA2NSAwIiBmaWxsPSJ0cmFuc3BhcmVudCIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9IjQwIiBjeT0iNjAiIHI9IjIiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI2MCIgY3k9IjUzIiByPSIzIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iOTAiIGN5PSI1OCIgcj0iMiIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjEyMCIgY3k9IjU1IiByPSIzIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMTU1IiBjeT0iNjIiIHI9IjIiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIzNSIgY3k9IjEwMCIgcj0iMiIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjYwIiBjeT0iOTUiIHI9IjMiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI5MCIgY3k9IjEwMCIgcj0iMiIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjEyMCIgY3k9Ijk3IiByPSIzIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMTYwIiBjeT0iMTA0IiByPSIyIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMzUiIGN5PSIxNDAiIHI9IjIiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI2MCIgY3k9IjEzNSIgcj0iMyIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjkwIiBjeT0iMTQwIiByPSIyIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMTIwIiBjeT0iMTM3IiByPSIzIiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iMTYwIiBjeT0iMTQ0IiByPSIyIiBmaWxsPSIjZmZmIi8+PC9zdmc+');
+            background-size: contain;
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(100, 200, 255, 0.6);
+            animation: pulse 3s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 12px rgba(100, 200, 255, 0.6);
+            }
+            100% {
+                box-shadow: 0 0 18px rgba(100, 255, 255, 0.8);
+            }
+        }
+        
+        .connected-planet-icon:hover {
+            transform: rotate(15deg) scale(1.1);
+        }
+        
+        .connected-planet-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
+        }
+        
+        .current-lang-indicator {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #212121;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: #fff;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            text-transform: uppercase;
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: rgba(20, 20, 35, 0.95);
+            border-radius: 10px;
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+            min-width: 170px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-origin: top right;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .language-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            border: 1px solid transparent;
+        }
+        
+        .language-option:last-child {
+            margin-bottom: 0;
+        }
+        
+        .language-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(-2px);
+        }
+        
+        .language-option.active {
+            background: #C9AC48;
+            color: #000;
+            font-weight: 600;
+        }
+        
+        .flag-icon {
+            width: 26px;
+            height: 18px;
+            margin-right: 12px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
+        }
+        
+        .flag-en {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjM1IDY1MCIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPg0KPGRlZnM+DQo8ZyBpZD0idW5pb24iPg0KPHVzZSB5PSItLjIxNiIgeGxpbms6aHJlZj0iI3g0Ii8+DQo8dXNlIHhsaW5rOmhyZWY9IiN4NCIvPg0KPHVzZSB5PSIuMjE2IiB4bGluazpocmVmPSIjczYiLz4NCjwvZz4NCjxnIGlkPSJ4NCI+DQo8dXNlIHhsaW5rOmhyZWY9IiNzNiIvPg0KPHVzZSB5PSIuMDU0IiB4bGluazpocmVmPSIjczUiLz4NCjx1c2UgeT0iLjEwOCIgeGxpbms6aHJlZj0iI3M2Ii8+DQo8dXNlIHk9Ii4xNjIiIHhsaW5rOmhyZWY9IiNzNSIvPg0KPC9nPg0KPGcgaWQ9InM1Ij4NCjx1c2UgeD0iLS4yNTIiIHhsaW5rOmhyZWY9IiNzdGFyIi8+DQo8dXNlIHg9Ii0uMTI2IiB4bGluazpocmVmPSIjc3RhciIvPg0KPHVzZSB4bGluazpocmVmPSIjc3RhciIvPg0KPHVzZSB4PSIuMTI2IiB4bGluazpocmVmPSIjc3RhciIvPg0KPHVzZSB4PSIuMjUyIiB4bGluazpocmVmPSIjc3RhciIvPg0KPC9nPg0KPGcgaWQ9InM2Ij4NCjx1c2UgeD0iLS4wNjMiIHhsaW5rOmhyZWY9IiNzNSIvPg0KPHVzZSB4PSIuMzE1IiB4bGluazpocmVmPSIjc3RhciIvPg0KPC9nPg0KPGcgaWQ9InN0YXIiPg0KPHVzZSB4bGluazpocmVmPSIjcHQiIHRyYW5zZm9ybT0ibWF0cml4KC0uODA5IC0uNTg4IC41ODggLS44MDkgMCAwKSIvPg0KPHVzZSB4bGluazpocmVmPSIjcHQiIHRyYW5zZm9ybT0ibWF0cml4KC0uMzA5IC0uOTUxIC45NTEgLS4zMDkgMCAwKSIvPg0KPHVzZSB4bGluazpocmVmPSIjcHQiLz4NCjx1c2UgeGxpbms6aHJlZj0iI3B0IiB0cmFuc2Zvcm09Im1hdHJpeCguMzA5IC0uOTUxIC45NTEgLjMwOSAwIDApIi8+DQo8dXNlIHhsaW5rOmhyZWY9IiNwdCIgdHJhbnNmb3JtPSJtYXRyaXgoLjgwOSAtLjU4OCAuNTg4IC44MDkgMCAwKSIvPg0KPC9nPg0KPHBhdGggZmlsbD0iI2ZmZiIgaWQ9InB0IiBkPSJNMCwtMVYxSC41IiB0cmFuc2Zvcm09InJvdGF0ZSgzNiAwLDApIi8+DQo8L2RlZnM+DQo8cGF0aCBmaWxsPSIjMDAwMDVlIiBkPSJtMCwwaDEyMzV2NjUwSDB6Ii8+DQo8ZyBmaWxsPSIjZmZmIj4NCjxwYXRoIGQ9Im0wLDBoMTIzNXY1MEgweiIvPg0KPHBhdGggZD0ibTAsMTAwaDEyMzV2NTBIMHoiLz4NCjxwYXRoIGQ9Im0wLDIwMGgxMjM1djUwSDB6Ii8+DQo8cGF0aCBkPSJtMCwzMDBoMTIzNXY1MEgweiIvPg0KPHBhdGggZD0ibTAsNDAwaDEyMzV2NTBIMHoiLz4NCjxwYXRoIGQ9Im0wLDUwMGgxMjM1djUwSDB6Ii8+DQo8cGF0aCBkPSJtMCw2MDBoMTIzNXY1MEgweiIvPg0KPC9nPg0KPHBhdGggZmlsbD0iI2NmMTQyYiIgZD0ibTAsMGg0OTR2MzUwSDB6Ii8+DQo8ZyBmaWxsPSIjZmZmIiB0cmFuc2Zvcm09Im1hdHJpeCg2NTAgMCAwIDY1MCAyNDcgMTc1KSI+DQo8dXNlIHhsaW5rOmhyZWY9IiN1bmlvbiIvPg0KPC9nPg0KPC9zdmc+');
+        }
+        
+        .flag-es {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3NTAgNTAwIj4NCjxwYXRoIGZpbGw9IiNjNjBiMWUiIGQ9Im0wLDBoNzUwdjUwMEgweiIvPg0KPHBhdGggZmlsbD0iI2ZmYzQwMCIgZD0ibTAsMTI1aDc1MHYyNTBIMHoiLz4NCjwvc3ZnPg==');
+        }
+        
+        .flag-it {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTAgMTAwIj4NCjxwYXRoIGZpbGw9IiMwMDk1NDYiIGQ9Im0wLDBoNTB2MTAwSDB6Ii8+DQo8cGF0aCBmaWxsPSIjZmZmIiBkPSJtNTAsMGg1MHYxMDBINTB6Ii8+DQo8cGF0aCBmaWxsPSIjY2UyYjM3IiBkPSJtMTAwLDBoNTB2MTAwSDEwMHoiLz4NCjwvc3ZnPg==');
+        }
+        
+        .flag-pt {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MDAgNDAwIj4NCjxwYXRoIGZpbGw9IiMwNTZiMTAiIGQ9Im0wLDBoNjAwdjQwMEgweiIvPg0KPHBhdGggZmlsbD0iI2RmMDEwMCIgZD0ibTAsMGgyNDB2NDAwSDB6Ii8+DQo8L3N2Zz4=');
+        }
+        
+        .flag-de {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1IDMiPg0KPHBhdGggZD0ibTAsMGg1djFIMHoiLz4NCjxwYXRoIGZpbGw9IiNkMDAiIGQ9Im0wLDFoNXYxSDB6Ii8+DQo8cGF0aCBmaWxsPSIjZmZjZTAwIiBkPSJtMCwyaDV2MUgweiIvPg0KPC9zdmc+');
+        }
+    </style>
+    
+    
+</head>
+<body class="">
+    <!-- Overlay de transición entre páginas -->
+    <div class="page-transition-overlay">
+        <div class="transition-content">
+            <p class="greek-text">μετὰ τὸ νέἕν</p>
+            <div class="sacred-geometry-container">
+                <div class="flower-of-life">
+                    <img src="images/flower_of_life_enhanced.svg" alt="Flower of Life">
+                </div>
+                <div class="metatron-cube">
+                    <img src="images/metatron_cube_enhanced.svg" alt="Metatron's Cube">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Selector de idioma -->
+    <div class="language-selector">
+        <div class="connected-planet-icon" id="language-toggle">
+            <div class="current-lang-indicator">
+                en
+            </div>
+        </div>
+        <div class="language-dropdown" id="language-menu">
+            <a href="/set-language/en" class="language-option active">
+                <div class="flag-icon flag-en"></div>
+                <span>English</span>
+            </a>
+            <a href="/set-language/es" class="language-option ">
+                <div class="flag-icon flag-es"></div>
+                <span>Español</span>
+            </a>
+            <a href="/set-language/it" class="language-option ">
+                <div class="flag-icon flag-it"></div>
+                <span>Italiano</span>
+            </a>
+            <a href="/set-language/pt" class="language-option ">
+                <div class="flag-icon flag-pt"></div>
+                <span>Português</span>
+            </a>
+            <a href="/set-language/de" class="language-option ">
+                <div class="flag-icon flag-de"></div>
+                <span>Deutsch</span>
+            </a>
+        </div>
+    </div>
 
-{% block title %}METATONEHEN - 
-    {% if session.get('language') == 'es' %}Transformación Espiritual
-    {% elif session.get('language') == 'it' %}Trasformazione Spirituale
-    {% elif session.get('language') == 'pt' %}Transformação Espiritual
-    {% elif session.get('language') == 'de' %}Spirituelle Transformation
-    {% else %}Spiritual Transformation{% endif %}
-{% endblock %}
+    <div class="cosmic-background">
+        <div class="stars"></div>
+        <div class="constellations"></div>
+    </div>
 
-{% block content %}
+    <header class="site-header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <h1>METATONEHEN</h1>
+                    <p class="greek-text">μετὰ τὸ νέἕν</p>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/courses">
+                                Courses
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/sessions">
+                                1-on-1 Sessions
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/group-sessions">
+                                Group Sessions
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/memberships">
+                                Memberships
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="calculatorsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Calculators
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="calculatorsDropdown">
+                                <li><a class="dropdown-item" href="/natal-chart">
+                                    Natal Chart
+                                </a></li>
+                                <li><a class="dropdown-item" href="/human-design">
+                                    Human Design
+                                </a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/blog">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        
 <section class="hero-section">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="hero-content">
-                    <h1>{{ content.hero_title|default('METATONEHEN') }}</h1>
-                    <p class="greek-text">{{ content.hero_subtitle|default('μετὰ τὸ νέἕν') }}</p>
-                    <p class="lead">{{ content.hero_text|default(
-                        'Bienvenido a mi sitio de conocimiento espiritual y geometría sagrada' if not session.get('language') or session.get('language') == 'en' else
-                        'Bienvenido a mi sitio de conocimiento espiritual y geometría sagrada' if session.get('language') == 'es' else
-                        'Benvenuto nel mio sito di conoscenza spirituale e geometria sacra' if session.get('language') == 'it' else
-                        'Bem-vindo ao meu site de conhecimento espiritual e geometria sagrada' if session.get('language') == 'pt' else
-                        'Willkommen auf meiner Website für spirituelles Wissen und heilige Geometrie'
-                    ) }}</p>
+                    <h1>METATONEHEN</h1>
+                    <p class="greek-text">μετὰ τὸ νέἕν</p>
+                    <p class="lead">Discover cosmic wisdom through sacred geometry and spiritual transformation</p>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="sacred-geometry-container">
                     <div class="flower-of-life">
-                        <img src="{{ url_for('static', filename='images/flower_of_life_enhanced.svg') }}" alt="Flower of Life">
+                        <img src="images/flower_of_life_enhanced.svg" alt="Flower of Life">
                     </div>
                     <div class="metatron-cube">
-                        <img src="{{ url_for('static', filename='images/metatron_cube_enhanced.svg') }}" alt="Metatron's Cube">
+                        <img src="images/metatron_cube_enhanced.svg" alt="Metatron's Cube">
                     </div>
                 </div>
             </div>
@@ -43,18 +325,10 @@
     <div class="container">
         <div class="section-title">
             <h2>
-                {% if session.get('language') == 'es' %}Explora Nuestros Portales
-                {% elif session.get('language') == 'it' %}Esplora I Nostri Portali
-                {% elif session.get('language') == 'pt' %}Explore Nossos Portais
-                {% elif session.get('language') == 'de' %}Erkunde Unsere Portale
-                {% else %}Explore Our Portals{% endif %}
+                Explore Our Portals
             </h2>
             <p>
-                {% if session.get('language') == 'es' %}Entra en los portales del conocimiento y la transformación
-                {% elif session.get('language') == 'it' %}Entra nei portali della conoscenza e della trasformazione
-                {% elif session.get('language') == 'pt' %}Entre nos portais do conhecimento e da transformação
-                {% elif session.get('language') == 'de' %}Betrete die Portale des Wissens und der Transformation
-                {% else %}Enter the portals of knowledge and transformation{% endif %}
+                Enter the portals of knowledge and transformation
             </p>
         </div>
         
@@ -63,29 +337,29 @@
                 <div class="metatron-portal-container">
                     <h3 class="portal-title">Courses</h3>
                     <div class="metatron-portal">
-                        <img src="{{ url_for('static', filename='images/metatron_cube_enhanced.svg') }}" alt="Metatron's Cube" class="portal-background">
+                        <img src="images/metatron_cube_enhanced.svg" alt="Metatron's Cube" class="portal-background">
                         <div class="portal-vertices">
-                            <a href="{{ url_for('courses') }}#love-courses" class="portal-vertex vertex-1 vertex-love">
+                            <a href="/courses#love-courses" class="portal-vertex vertex-1 vertex-love">
                                 <span>Love</span>
                             </a>
-                            <a href="{{ url_for('courses') }}#money-courses" class="portal-vertex vertex-2 vertex-money">
+                            <a href="/courses#money-courses" class="portal-vertex vertex-2 vertex-money">
                                 <span>Money</span>
                             </a>
-                            <a href="{{ url_for('courses') }}#health-courses" class="portal-vertex vertex-3 vertex-health">
+                            <a href="/courses#health-courses" class="portal-vertex vertex-3 vertex-health">
                                 <span>Health</span>
                             </a>
-                            <a href="{{ url_for('courses') }}#mind-courses" class="portal-vertex vertex-4 vertex-mind">
+                            <a href="/courses#mind-courses" class="portal-vertex vertex-4 vertex-mind">
                                 <span>Mind</span>
                             </a>
-                            <a href="{{ url_for('courses') }}#soul-courses" class="portal-vertex vertex-5 vertex-soul">
+                            <a href="/courses#soul-courses" class="portal-vertex vertex-5 vertex-soul">
                                 <span>Soul</span>
                             </a>
-                            <a href="{{ url_for('courses') }}#body-courses" class="portal-vertex vertex-6 vertex-body">
+                            <a href="/courses#body-courses" class="portal-vertex vertex-6 vertex-body">
                                 <span>Body</span>
                             </a>
                         </div>
                     </div>
-                    <a href="{{ url_for('courses') }}" class="portal-link">Enter Portal</a>
+                    <a href="/courses" class="portal-link">Enter Portal</a>
                 </div>
             </div>
             
@@ -93,29 +367,29 @@
                 <div class="metatron-portal-container">
                     <h3 class="portal-title">1-on-1 Sessions</h3>
                     <div class="metatron-portal">
-                        <img src="{{ url_for('static', filename='images/metatron_cube_enhanced.svg') }}" alt="Metatron's Cube" class="portal-background">
+                        <img src="images/metatron_cube_enhanced.svg" alt="Metatron's Cube" class="portal-background">
                         <div class="portal-vertices">
-                            <a href="{{ url_for('sessions') }}#coaching" class="portal-vertex vertex-1">
+                            <a href="/sessions#coaching" class="portal-vertex vertex-1">
                                 <span>Coaching</span>
                             </a>
-                            <a href="{{ url_for('sessions') }}#astrology" class="portal-vertex vertex-2">
+                            <a href="/sessions#astrology" class="portal-vertex vertex-2">
                                 <span>Astrology</span>
                             </a>
-                            <a href="{{ url_for('sessions') }}#human-design" class="portal-vertex vertex-3">
+                            <a href="/sessions#human-design" class="portal-vertex vertex-3">
                                 <span>Human Design</span>
                             </a>
-                            <a href="{{ url_for('sessions') }}#constellations" class="portal-vertex vertex-4">
+                            <a href="/sessions#constellations" class="portal-vertex vertex-4">
                                 <span>Constellations</span>
                             </a>
-                            <a href="{{ url_for('sessions') }}#healing" class="portal-vertex vertex-5">
+                            <a href="/sessions#healing" class="portal-vertex vertex-5">
                                 <span>Healing</span>
                             </a>
-                            <a href="{{ url_for('sessions') }}#meditation" class="portal-vertex vertex-6">
+                            <a href="/sessions#meditation" class="portal-vertex vertex-6">
                                 <span>Meditation</span>
                             </a>
                         </div>
                     </div>
-                    <a href="{{ url_for('sessions') }}" class="portal-link">Enter Portal</a>
+                    <a href="/sessions" class="portal-link">Enter Portal</a>
                 </div>
             </div>
             
@@ -123,29 +397,29 @@
                 <div class="metatron-portal-container">
                     <h3 class="portal-title">Group Sessions</h3>
                     <div class="metatron-portal">
-                        <img src="{{ url_for('static', filename='images/metatron_cube_enhanced.svg') }}" alt="Metatron's Cube" class="portal-background">
+                        <img src="images/metatron_cube_enhanced.svg" alt="Metatron's Cube" class="portal-background">
                         <div class="portal-vertices">
-                            <a href="{{ url_for('group_sessions') }}#meditations" class="portal-vertex vertex-1">
+                            <a href="/group-sessions#meditations" class="portal-vertex vertex-1">
                                 <span>Meditations</span>
                             </a>
-                            <a href="{{ url_for('group_sessions') }}#retreats" class="portal-vertex vertex-2">
+                            <a href="/group-sessions#retreats" class="portal-vertex vertex-2">
                                 <span>Retreats</span>
                             </a>
-                            <a href="{{ url_for('group_sessions') }}#workshops" class="portal-vertex vertex-3">
+                            <a href="/group-sessions#workshops" class="portal-vertex vertex-3">
                                 <span>Workshops</span>
                             </a>
-                            <a href="{{ url_for('group_sessions') }}#ceremonies" class="portal-vertex vertex-4">
+                            <a href="/group-sessions#ceremonies" class="portal-vertex vertex-4">
                                 <span>Ceremonies</span>
                             </a>
-                            <a href="{{ url_for('group_sessions') }}#healing-circles" class="portal-vertex vertex-5">
+                            <a href="/group-sessions#healing-circles" class="portal-vertex vertex-5">
                                 <span>Healing Circles</span>
                             </a>
-                            <a href="{{ url_for('group_sessions') }}#online-events" class="portal-vertex vertex-6">
+                            <a href="/group-sessions#online-events" class="portal-vertex vertex-6">
                                 <span>Online Events</span>
                             </a>
                         </div>
                     </div>
-                    <a href="{{ url_for('group_sessions') }}" class="portal-link">Enter Portal</a>
+                    <a href="/group-sessions" class="portal-link">Enter Portal</a>
                 </div>
             </div>
         </div>
@@ -161,45 +435,89 @@
         
         <div class="metatron-courses-container">
             <div class="metatron-cube-large">
-                <img src="{{ url_for('static', filename='images/metatron_cube_enhanced.svg') }}" alt="Metatron's Cube Background">
+                <img src="images/metatron_cube_enhanced.svg" alt="Metatron's Cube Background">
                 
                 <div class="cube-vertices">
-                    {% if featured_courses %}
-                        {% for course in featured_courses %}
-                            <a href="{{ url_for('courses') }}?category={{ course.category }}" class="vertex vertex-course vertex-{{ loop.index }}">
+                    
+                        
+                            <a href="/courses?category=Espiritualidad" class="vertex vertex-course vertex-1">
                                 <div class="vertex-content">
-                                    <span class="vertex-name">{{ course.title }}</span>
-                                    <span class="vertex-category">{{ course.category }}</span>
+                                    <span class="vertex-name">Meditación Cósmica</span>
+                                    <span class="vertex-category">Espiritualidad</span>
                                 </div>
                                 
-                                <div class="course-card-popup">
-                                    {% if course.image_url %}
+                                </a><div class="course-card-popup"><a href="/courses?category=Espiritualidad" class="vertex vertex-course vertex-1">
+                                    
                                     <div class="course-image">
-                                        <img src="{{ course.image_url }}" alt="{{ course.title }}">
+                                        <img src="/static/images/course1.jpg" alt="Meditación Cósmica">
                                     </div>
-                                    {% endif %}
-                                    <div class="course-info">
-                                        <h3>{{ course.title }}</h3>
+                                    
+                                    </a><div class="course-info"><a href="/courses?category=Espiritualidad" class="vertex vertex-course vertex-1">
+                                        <h3>Meditación Cósmica</h3>
                                         <div class="course-details">
-                                            <span class="course-category">{{ course.category }}</span>
-                                            <span class="course-duration">{{ course.duration }}</span>
+                                            <span class="course-category">Espiritualidad</span>
+                                            <span class="course-duration">6 semanas</span>
                                         </div>
-                                        <p class="course-description">{{ course.description[:100] }}{% if course.description|length > 100 %}...{% endif %}</p>
-                                        <a href="{{ url_for('courses') }}?category={{ course.category }}" class="btn btn-outline-primary btn-sm">Learn More</a>
+                                        <p class="course-description">Aprende técnicas avanzadas de meditación conectadas con la energía cósmica</p>
+                                        </a><a href="/courses?category=Espiritualidad" class="btn btn-outline-primary btn-sm">Learn More</a>
                                     </div>
                                 </div>
-                            </a>
-                        {% endfor %}
-                    {% else %}
-                        <div class="no-courses-message">
-                            <p>Stay tuned for our upcoming courses!</p>
-                        </div>
-                    {% endif %}
+                            
+                        
+                            <a href="/courses?category=Geometría Sagrada" class="vertex vertex-course vertex-2">
+                                <div class="vertex-content">
+                                    <span class="vertex-name">Geometría Sagrada</span>
+                                    <span class="vertex-category">Geometría Sagrada</span>
+                                </div>
+                                
+                                </a><div class="course-card-popup"><a href="/courses?category=Geometría Sagrada" class="vertex vertex-course vertex-2">
+                                    
+                                    <div class="course-image">
+                                        <img src="/static/images/course2.jpg" alt="Geometría Sagrada">
+                                    </div>
+                                    
+                                    </a><div class="course-info"><a href="/courses?category=Geometría Sagrada" class="vertex vertex-course vertex-2">
+                                        <h3>Geometría Sagrada</h3>
+                                        <div class="course-details">
+                                            <span class="course-category">Geometría Sagrada</span>
+                                            <span class="course-duration">8 semanas</span>
+                                        </div>
+                                        <p class="course-description">Descubre los patrones sagrados que dan forma al universo</p>
+                                        </a><a href="/courses?category=Geometría Sagrada" class="btn btn-outline-primary btn-sm">Learn More</a>
+                                    </div>
+                                </div>
+                            
+                        
+                            <a href="/courses?category=Símbolos" class="vertex vertex-course vertex-3">
+                                <div class="vertex-content">
+                                    <span class="vertex-name">Flor de la Vida</span>
+                                    <span class="vertex-category">Símbolos</span>
+                                </div>
+                                
+                                </a><div class="course-card-popup"><a href="/courses?category=Símbolos" class="vertex vertex-course vertex-3">
+                                    
+                                    <div class="course-image">
+                                        <img src="/static/images/course3.jpg" alt="Flor de la Vida">
+                                    </div>
+                                    
+                                    </a><div class="course-info"><a href="/courses?category=Símbolos" class="vertex vertex-course vertex-3">
+                                        <h3>Flor de la Vida</h3>
+                                        <div class="course-details">
+                                            <span class="course-category">Símbolos</span>
+                                            <span class="course-duration">4 semanas</span>
+                                        </div>
+                                        <p class="course-description">Explora el símbolo ancestral de la creación y sus aplicaciones</p>
+                                        </a><a href="/courses?category=Símbolos" class="btn btn-outline-primary btn-sm">Learn More</a>
+                                    </div>
+                                </div>
+                            
+                        
+                    
                 </div>
             </div>
             
             <div class="view-all-courses">
-                <a href="{{ url_for('courses') }}" class="btn btn-primary">View All Courses</a>
+                <a href="/courses" class="btn btn-primary">View All Courses</a>
             </div>
         </div>
     </div>
@@ -220,7 +538,7 @@
                     </div>
                     <h3>Natal Chart Calculator</h3>
                     <p>Explore your astrological blueprint and planetary influences</p>
-                    <a href="{{ url_for('natal_chart') }}" class="btn btn-primary">Calculate Now</a>
+                    <a href="/natal-chart" class="btn btn-primary">Calculate Now</a>
                 </div>
             </div>
             
@@ -231,7 +549,7 @@
                     </div>
                     <h3>Human Design Calculator</h3>
                     <p>Discover your energetic type and inner authority</p>
-                    <a href="{{ url_for('human_design') }}" class="btn btn-primary">Calculate Now</a>
+                    <a href="/human-design" class="btn btn-primary">Calculate Now</a>
                 </div>
             </div>
         </div>
@@ -256,7 +574,7 @@
                         <li>Monthly group meditation</li>
                         <li>Access to community forum</li>
                     </ul>
-                    <a href="{{ url_for('memberships') }}" class="btn btn-secondary">Learn More</a>
+                    <a href="/memberships" class="btn btn-secondary">Learn More</a>
                 </div>
             </div>
             
@@ -272,7 +590,7 @@
                         <li>Priority registration for retreats</li>
                         <li>Exclusive monthly masterclass</li>
                     </ul>
-                    <a href="{{ url_for('memberships') }}" class="btn btn-primary">Learn More</a>
+                    <a href="/memberships" class="btn btn-primary">Learn More</a>
                 </div>
             </div>
         </div>
@@ -322,4 +640,111 @@
         </div>
     </div>
 </section>
-{% endblock %}
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>METATONEHEN</h3>
+                    <p>
+                        Spiritual education and transformation through cosmic wisdom and sacred geometry.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h3>
+                        Quick Links
+                    </h3>
+                    <ul class="footer-links">
+                        <li><a href="/courses">
+                            Courses
+                        </a></li>
+                        <li><a href="/sessions">
+                            1-on-1 Sessions
+                        </a></li>
+                        <li><a href="/group-sessions">
+                            Group Sessions
+                        </a></li>
+                        <li><a href="/memberships">
+                            Memberships
+                        </a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h3>
+                        Connect
+                    </h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center mt-4">
+                    <p>
+                        
+                            © 2023 METATONEHEN. All Rights Reserved.
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script src="js/page-transition.js"></script>
+    
+    
+    
+    <!-- Language Selector JS -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const languageToggle = document.getElementById('language-toggle');
+        const languageMenu = document.getElementById('language-menu');
+        
+        // Toggle language dropdown
+        languageToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (languageMenu.style.display === 'flex') {
+                languageMenu.style.display = 'none';
+                languageToggle.classList.remove('active');
+            } else {
+                languageMenu.style.display = 'flex';
+                languageToggle.classList.add('active');
+            }
+        });
+        
+        // Close dropdown when clicking elsewhere
+        document.addEventListener('click', function() {
+            languageMenu.style.display = 'none';
+            languageToggle.classList.remove('active');
+        });
+        
+        // Prevent dropdown from closing when clicking inside it
+        languageMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+        
+        // Add click event for language options to prevent default behavior
+        const languageOptions = document.querySelectorAll('.language-option');
+        languageOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // Mostrar un indicador visual de carga
+                this.classList.add('selecting');
+                // Permitir que continue la navegación normal
+            });
+        });
+    });
+    </script>
+    
+    
+
+</body></html>
